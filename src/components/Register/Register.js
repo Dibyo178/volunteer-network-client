@@ -21,14 +21,14 @@ const Register = () => {
     const history = useHistory()
 
 
-    // useEffect(() => {
-    //     fetch('http://localhost:5000/allEvents')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             const registerEvent = data.find(event => event._id === registerId)
-    //             setVolunteerInfo(registerEvent)
-    //         })
-    // }, [registerId])
+    useEffect(() => {
+        fetch('http://localhost:5000/allEvents')
+            .then(response => response.json())
+            .then(data => {
+                const registerEvent = data.find(event => event.id === registerId)
+                setVolunteerInfo(registerEvent)
+            })
+    }, [registerId])
 
 
     const onSubmit = data => {
@@ -36,20 +36,20 @@ const Register = () => {
 
         const volunteerDetails = { ...loggedInUser, volunteerEvent: data.event, registrationDate: data.date, desicription: data.desicription }
 
-        // fetch('http://localhost:5000/addVolunteer', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(volunteerDetails)
-        // })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         if (data) {
-        //             alert('Registration succeeded')
-        //             history.push('/registerVolunteer')
-        //         }
-        //     })
+        fetch('http://localhost:5000/addRegister', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(volunteerDetails)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    alert('Registration succeeded')
+                    history.push('/registerVolunteer')
+                }
+            })
   }
 
     return (
@@ -77,7 +77,7 @@ const Register = () => {
                         <input name="event" defaultValue={volunteerInfo.name} ref={register({ required: true })} placeholder="Event Name" />
                         {errors.event && <span className="error">Event is required</span>}
 
-                        <input className="commonBgColor" type="submit" value="Registration" style={{ color: '#fff' }} />
+                        <input className="commonBgColor" type="submit"  value="Registration" style={{ color: '#fff' }} />
                     </form>
                 </div>
             </Card>

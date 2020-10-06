@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './AdminPanel.css'
+import './AdminPanel.css';
+// import fakeData from '../../fakeData/fakeData'
 
 
 const Admin = () => {
+    const handleAddEvent=()=>{
+    
+   
+    }
    
     return (
         <div className="container">
@@ -17,7 +22,7 @@ const Admin = () => {
                     </div>
                     <div className="d-flex">
                         <img style={{ height: '25px' }} src="https://i.ibb.co/3BSp44P/plus-1.png" alt="" />
-                        <Link to="/newEvent"><p>Add event</p></Link>
+                        <Link to="/newEvent"><button onClick={handleAddEvent}>Add event</button></Link>
                     </div>
                 </div>
             </div>
